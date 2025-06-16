@@ -1,0 +1,43 @@
+#include <stdio.h>
+#include <string.h>
+
+
+int isUnique(char str[], int start, int end) {
+    for (int i = start; i < end; i++) {
+        for(int j = i + 1; j < end; j++) {
+            if (str[i] == str[j]) {
+                return 0;  // Not unique
+            }
+        }
+    }
+    return 1;  
+}
+
+//  to find longest substring length
+int lengthOfLongestSubstring(char str[]) {
+    int maxLength = 0;
+    int n = strlen(str);
+
+    for (int i = 0; i < n; i++) {
+        for (int j = i + 1; j <= n; j++) {
+            if (isUnique(str, i, j)) {
+                int len = j - i;
+                if (len > maxLength) {
+                    maxLength = len;
+                }
+            }
+        }
+    }
+
+    return maxLength;
+}
+
+int main() {
+    char str[100];
+    printf("Enter a string: ");
+    scanf("%s", str);
+
+    int result = lengthOfLongestSubstring(str);
+    printf("Length of longest substring without repeating characters: %d\n", result);
+    return 0;
+}
