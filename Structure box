@@ -1,0 +1,61 @@
+#include <stdio.h>
+
+// Define structure
+struct Box {
+    float length;
+    float breadth;
+    float height;
+};
+
+// Function to swap two boxes
+void swapBoxes(struct Box *b1, struct Box *b2) {
+    struct Box temp = *b1;
+    *b1 = *b2;
+    *b2 = temp;
+}
+
+// Function to display box details
+void printBox(struct Box b, int boxNumber) {
+    printf("Box %d:\n", boxNumber);
+    printf("Length: %.2f\n", b.length);
+    printf("Breadth: %.2f\n", b.breadth);
+    printf("Height: %.2f\n", b.height);
+    printf("\n");
+}
+
+int main() {
+    struct Box box1, box2;
+
+    // Input for Box 1
+    printf("Enter dimensions for Box 1:\n");
+    printf("Length: ");
+    scanf("%f", &box1.length);
+    printf("Breadth: ");
+    scanf("%f", &box1.breadth);
+    printf("Height: ");
+    scanf("%f", &box1.height);
+
+    // Input for Box 2
+    printf("\nEnter dimensions for Box 2:\n");
+    printf("Length: ");
+    scanf("%f", &box2.length);
+    printf("Breadth: ");
+    scanf("%f", &box2.breadth);
+    printf("Height: ");
+    scanf("%f", &box2.height);
+
+    // Display before swap
+    printf("\nBefore swapping:\n");
+    printBox(box1, 1);
+    printBox(box2, 2);
+
+    // Swap boxes
+    swapBoxes(&box1, &box2);
+
+    // Display after swap
+    printf("After swapping:\n");
+    printBox(box1, 1);
+    printBox(box2, 2);
+
+    return 0;
+}
