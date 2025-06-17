@@ -1,0 +1,33 @@
+#include <stdio.h>
+
+int findMajorityElement(int arr[], int n) {
+    int freq[1000] = {0}; 
+
+    for (int i = 0; i < n; i++) {
+        freq[arr[i]]++;
+        if (freq[arr[i]] > n / 2)
+            return arr[i];
+    }
+
+    return -1; 
+}
+
+int main() {
+    int n;
+    printf("Enter size of array: ");
+    scanf("%d", &n);
+
+    int arr[n];
+    printf("Enter %d elements:\n", n);
+    for (int i = 0; i < n; i++) {
+        scanf("%d", &arr[i]);
+    }
+
+    int result = findMajorityElement(arr, n);
+    if (result != -1)
+        printf("Majority element is: %d\n", result);
+    else
+        printf("No majority element found.\n");
+
+    return 0;
+}
