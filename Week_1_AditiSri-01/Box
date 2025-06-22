@@ -1,0 +1,19 @@
+#include <stdio.h>
+struct Box
+{
+    int l, b, h;
+};
+void swapBoxes(struct Box *a, struct Box *b)
+{
+    struct Box temp = *a;
+    *a = *b;
+    *b = temp;
+}
+int main()
+{
+    struct Box b1 = {1, 2, 3}, b2 = {4, 5, 6};
+    printf("Before:\nBox1: %d %d %d\nBox2: %d %d %d\n", b1.l, b1.b, b1.h, b2.l, b2.b, b2.h);
+    swapBoxes(&b1, &b2);
+    printf("After:\nBox1: %d %d %d\nBox2: %d %d %d\n", b1.l, b1.b, b1.h, b2.l, b2.b, b2.h);
+    return 0;
+}
