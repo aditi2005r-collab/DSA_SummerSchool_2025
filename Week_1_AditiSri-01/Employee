@@ -1,0 +1,24 @@
+#include <stdio.h>
+struct Employee
+{
+    int id;
+    char name[50];
+    float salary;
+};
+int main()
+{
+    struct Employee e[5], *p = e;
+    int i, max = 0;
+    for (i = 0; i < 5; i++)
+    {
+        printf("Enter ID, Name, Salary: ");
+        scanf("%d %s %f", &p[i].id, p[i].name, &p[i].salary);
+        if (p[i].salary > p[max].salary)
+        {
+            max = i;
+        }
+    }
+    printf("\nHighest Salary:\n");
+    printf("ID: %d\nName: %s\nSalary: %.2f\n", p[max].id, p[max].name, p[max].salary);
+    return 0;
+}
