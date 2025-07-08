@@ -1,0 +1,49 @@
+#include <stdio.h>
+
+#define SIZE 100
+
+int q1[SIZE], q2[SIZE];
+int f1 = -1, r1 = -1, f2 = -1, r2 = -1;
+
+void add(int q[], int *f, int *r, int x) {
+    if (*f == -1) *f = 0;
+    q[++(*r)] = x;
+}
+
+int removeQ(int q[], int *f, int *r) {
+    if (*f == -1 || *f > *r) return -1;
+    return q[(*f)++];
+}
+
+int empty() {
+    return f1 == -1 || f1 > r1;
+}
+
+void push(int x) {
+    add(q2, &f2, &r2, x);
+    while (!empty()) {
+        add(q2, &f2, &r2, removeQ(q1, &f1, &r1));
+    }
+
+    int *tempQ = q1, tempF = f1, tempR = r1;
+    q1 = q2; f1 = f2; r1 = r2;
+    q2 = tempQ; f2 = tempF; r2 = tempR;
+}
+
+int pop() {
+    return removeQ(q1, &f1, &r1);
+}
+
+int main() {
+    push(5);
+    push(10);
+    push(15);
+
+    printf("Pop: %d\n", pop());
+    printf("Pop: %d\n", pop());
+    push(20);
+    printf("Pop: %d\n", pop());
+    printf("Pop: %d\n", pop());
+
+    return 0;
+}
