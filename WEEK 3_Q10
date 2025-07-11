@@ -1,0 +1,64 @@
+#include <stdio.h>
+
+#define MAX 100
+
+int queue[MAX], front = 0, rear = -1;
+int stack[MAX], top = -1;
+
+void enqueue(int x) {
+    queue[++rear] = x;
+}
+
+int dequeue() {
+    return queue[front++];
+}
+
+void push(int x) {
+    stack[++top] = x;
+}
+
+int pop() {
+    return stack[top--];
+}
+
+void reverseFirstK(int k) {
+    for (int i = 0; i < k; i++)
+        push(dequeue());
+
+    for (int i = 0; i < k; i++)
+        queue[rear + 1 + i] = pop();
+
+    for (int i = front + k; i <= rear; i++)
+        queue[rear + 1 + k++] = queue[i];
+
+    rear = rear + k - front;
+    front = 0;
+}
+
+void printQueue() {
+    for (int i = front; i <= rear; i++)
+        printf("%d ", queue[i]);
+    printf("\n");
+}
+
+int main() {
+    int n, k;
+    printf("Enter number of elements in queue: ");
+    scanf("%d", &n);
+    printf("Enter %d elements: ", n);
+    for (int i = 0; i < n; i++) {
+        int x;
+        scanf("%d", &x);
+        enqueue(x);
+    }
+
+    printf("Enter value of k: ");
+    scanf("%d", &k);
+
+    reverseFirstK(k);
+
+    printf("Queue after reversing first %d elements: ", k);
+    printQueue();
+
+    return 0;
+}
